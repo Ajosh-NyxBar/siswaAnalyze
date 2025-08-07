@@ -279,8 +279,8 @@ Proyek ini dibuat untuk keperluan akademik/skripsi.
 ## 👨‍💻 Pengembang
 
 **Hari Hari Ngoding**
-- Email: [your-email@domain.com]
-- GitHub: [your-github-username]
+- Email: fb.autolike2018@gmail.com
+- GitHub: Ajosh-NyxBar
 
 ---
 
