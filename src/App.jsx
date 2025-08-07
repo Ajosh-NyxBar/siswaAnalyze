@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
+import DataEntry from './pages/DataEntry';
+import Analytics from './pages/Analytics';
 import { storage } from './utils/helper';
 
 const App = () => {
@@ -52,6 +54,18 @@ const App = () => {
             path="/dashboard" 
             element={
               user ? <Dashboard user={user} onLogout={handleLogout} /> : <Navigate to="/login" replace />
+            } 
+          />
+          <Route 
+            path="/data-entry" 
+            element={
+              user ? <DataEntry /> : <Navigate to="/login" replace />
+            } 
+          />
+          <Route 
+            path="/analytics" 
+            element={
+              user ? <Analytics user={user} onLogout={handleLogout} /> : <Navigate to="/login" replace />
             } 
           />
           <Route 

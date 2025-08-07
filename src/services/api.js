@@ -237,6 +237,40 @@ export const analyticsAPI = {
     
     const response = await apiClient.get(`/analytics/subjects?${params.toString()}`);
     return response.data;
+  },
+  
+  // Decision Support System - SAW Analysis
+  getSAWAnalysis: async (filters = {}) => {
+    const params = new URLSearchParams();
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value) params.append(key, value);
+    });
+    
+    const response = await apiClient.get(`/analytics/saw-analysis?${params.toString()}`);
+    return response.data;
+  },
+  
+  // K-Means Clustering Analysis
+  getKMeansAnalysis: async (filters = {}, k = 3) => {
+    const params = new URLSearchParams();
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value) params.append(key, value);
+    });
+    params.append('k', k);
+    
+    const response = await apiClient.get(`/analytics/kmeans-clustering?${params.toString()}`);
+    return response.data;
+  },
+  
+  // Advanced Analytics with both methods
+  getAdvancedAnalytics: async (filters = {}) => {
+    const params = new URLSearchParams();
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value) params.append(key, value);
+    });
+    
+    const response = await apiClient.get(`/analytics/advanced?${params.toString()}`);
+    return response.data;
   }
 };
 

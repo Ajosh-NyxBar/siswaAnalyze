@@ -12,6 +12,9 @@ Aplikasi web untuk menganalisis dan memvisualisasikan data performa siswa berbas
 - 📈 **Dashboard Analytics** - Statistik nilai rata-rata, tertinggi, dan total siswa
 - 📥 **Export CSV** - Ekspor data ke format CSV
 - 🎨 **UI/UX Modern** - Interface yang responsif dan user-friendly
+- 🎯 **SAW Analysis** - Decision Support System dengan Simple Additive Weighting
+- 🤖 **K-Means Clustering** - Machine Learning untuk pengelompokan siswa
+- 🧠 **Advanced Analytics** - Halaman khusus untuk analisis mendalam
 
 ### 🔄 Fitur Dalam Pengembangan
 - 📥 **Export Excel/PDF** - Ekspor laporan dalam format Excel dan PDF
@@ -42,14 +45,18 @@ src/
 ├── components/
 │   ├── ChartNilai.jsx      # Komponen untuk grafik visualisasi
 │   ├── FilterForm.jsx      # Komponen form filter data
-│   └── TabelSiswa.jsx      # Komponen tabel data siswa
+│   ├── TabelSiswa.jsx      # Komponen tabel data siswa
+│   ├── SAWAnalysis.jsx     # Komponen analisis SAW (Decision Support)
+│   └── KMeansAnalysis.jsx  # Komponen K-Means clustering
 ├── pages/
 │   ├── Dashboard.jsx       # Halaman utama dashboard
-│   └── Login.jsx           # Halaman login
+│   ├── Login.jsx           # Halaman login
+│   ├── DataEntry.jsx       # Halaman input data
+│   └── Analytics.jsx       # Halaman advanced analytics
 ├── services/
 │   └── api.js              # Konfigurasi dan fungsi API
 ├── utils/
-│   └── helper.js           # Utility functions
+│   └── helper.js           # Utility functions + algoritma SAW & K-Means
 ├── App.jsx                 # Komponen utama aplikasi
 ├── main.jsx               # Entry point aplikasi
 └── index.css              # Styling global
@@ -121,6 +128,12 @@ Role: Guru
   - 🔴 Merah: <70 (Perlu Perbaikan)
 - Export ke CSV
 
+### 5. **Advanced Analytics** 🆕
+- **SAW Analysis**: Decision Support System untuk prioritas siswa
+- **K-Means Clustering**: Machine Learning untuk pengelompokan otomatis
+- **Comparative Analysis**: Perbandingan metodologi
+- **Interactive Visualizations**: Grafik scatter plot, pie chart, bar chart
+
 ## 🔧 Utility Functions
 
 ### Data Processing
@@ -139,6 +152,18 @@ Role: Guru
 ### Export Functions
 - `exportToCSV()` - Export data ke format CSV
 - `generateChartColors()` - Generate warna untuk grafik
+
+### Decision Support System (SAW)
+- `normalizeForSAW()` - Normalisasi data untuk metode SAW
+- `calculateSAWScore()` - Hitung skor Simple Additive Weighting
+- `analyzePrioritySiswa()` - Analisis prioritas siswa dengan SAW
+
+### Machine Learning (K-Means)
+- `euclideanDistance()` - Hitung jarak Euclidean
+- `initializeCentroids()` - Inisialisasi centroid K-Means
+- `assignToClusters()` - Assign data ke cluster terdekat
+- `updateCentroids()` - Update posisi centroid
+- `kMeansClustering()` - Algoritma K-Means lengkap
 
 ### Validation
 - `isValidEmail()` - Validasi format email
@@ -165,18 +190,25 @@ Role: Guru
 - [x] Chart interaktif dengan tooltip
 - [x] Toggle antara jenis grafik
 
+### Minggu 6-7: Advanced Analytics ✅
+- [x] Implementasi Decision Support System (SAW)
+- [x] K-Means Clustering untuk Machine Learning
+- [x] Advanced Analytics page dengan metodologi comparison
+- [x] Interactive visualizations (scatter plot, pie chart)
+
 ### Minggu 7-8: Backend Integration 🔄
 - [ ] Setup Node.js + Express.js backend
 - [ ] Database design (PostgreSQL/MongoDB)
-- [ ] REST API endpoints
+- [ ] REST API endpoints (termasuk analytics endpoints)
 - [ ] JWT authentication
 - [ ] Integrasi frontend dengan backend
 
 ### Minggu 9-10: Advanced Features 📋
 - [ ] Export ke Excel dan PDF
-- [ ] Advanced analytics dan reporting
+- [ ] Advanced analytics dan reporting dengan real data
 - [ ] Role-based access control
 - [ ] Data import dari Excel/CSV
+- [ ] Real-time analytics dashboard
 
 ### Minggu 11-12: Testing & Deployment 📋
 - [ ] Unit testing dengan Jest
@@ -223,7 +255,48 @@ POST   /api/reports/export/pdf
 GET    /api/analytics/dashboard
 GET    /api/analytics/trends
 GET    /api/analytics/subjects
+GET    /api/analytics/saw-analysis
+GET    /api/analytics/kmeans-clustering
+GET    /api/analytics/advanced
 ```
+
+## 🧠 Metodologi Analytics
+
+### 1. Decision Support System (SAW)
+**Simple Additive Weighting** untuk menentukan prioritas siswa berdasarkan multiple criteria:
+
+#### Kriteria yang Digunakan:
+- **Nilai Rata-rata** (Bobot: 40%) - Performa akademik utama
+- **Kehadiran** (Bobot: 30%) - Tingkat partisipasi siswa
+- **Nilai Sikap** (Bobot: 20%) - Aspek behavioral
+- **Jumlah Tugas** (Bobot: 10%) - Tingkat kedisiplinan
+
+#### Proses SAW:
+1. **Normalisasi**: Konversi semua kriteria ke skala 0-1
+2. **Weighted Sum**: Kalkulasi skor berdasarkan bobot
+3. **Ranking**: Urutkan siswa berdasarkan skor SAW
+4. **Kategorisasi**: Berprestasi, Cukup, Perlu Perhatian
+
+### 2. K-Means Clustering
+**Unsupervised Machine Learning** untuk pengelompokan otomatis siswa:
+
+#### Fitur yang Digunakan:
+- Nilai rata-rata (normalisasi 0-1)
+- Tingkat kehadiran (normalisasi 0-1) 
+- Nilai sikap (normalisasi 0-1)
+- Jumlah tugas diselesaikan (normalisasi 0-1)
+
+#### Proses K-Means:
+1. **Inisialisasi**: Random placement 3 centroid
+2. **Assignment**: Assign setiap siswa ke cluster terdekat
+3. **Update**: Recalculate posisi centroid
+4. **Convergence**: Iterasi hingga centroid stabil
+5. **Labeling**: Identifikasi cluster berdasarkan performa
+
+#### Output Clustering:
+- **Cluster Berprestasi**: Siswa dengan performa tinggi di semua aspek
+- **Cluster Cukup**: Siswa dengan performa sedang yang bisa ditingkatkan  
+- **Cluster Perlu Perhatian**: Siswa yang memerlukan intervensi segera
 
 ## 📝 Database Schema (Planned)
 
